@@ -41,6 +41,7 @@ namespace laboratory_3 {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,9 +61,12 @@ namespace laboratory_3 {
             this.textBoxForLeftBorder = new System.Windows.Forms.TextBox();
             this.textBoxForRightBorder = new System.Windows.Forms.TextBox();
             this.textBoxForStep = new System.Windows.Forms.TextBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -70,7 +74,7 @@ namespace laboratory_3 {
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Location = new System.Drawing.Point(0, 28);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(918, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -82,7 +86,7 @@ namespace laboratory_3 {
             this.aboutToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip2.Size = new System.Drawing.Size(918, 28);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -99,7 +103,7 @@ namespace laboratory_3 {
             // readDataToolStripMenuItem
             // 
             this.readDataToolStripMenuItem.Name = "readDataToolStripMenuItem";
-            this.readDataToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.readDataToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.readDataToolStripMenuItem.Text = "Read data";
             // 
             // saveDataToolStripMenuItem
@@ -108,7 +112,7 @@ namespace laboratory_3 {
             this.txtToolStripMenuItem,
             this.excelToolStripMenuItem});
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.saveDataToolStripMenuItem.Text = "Save data to";
             // 
             // txtToolStripMenuItem
@@ -187,6 +191,7 @@ namespace laboratory_3 {
             this.buttonForDeleting.TabIndex = 7;
             this.buttonForDeleting.Text = "Delete a graph";
             this.buttonForDeleting.UseVisualStyleBackColor = true;
+            this.buttonForDeleting.Click += new System.EventHandler(this.ИuttonForDeletingClick);
             // 
             // buttonForTable
             // 
@@ -205,6 +210,7 @@ namespace laboratory_3 {
             this.textBoxForCoefficient.Name = "textBoxForCoefficient";
             this.textBoxForCoefficient.Size = new System.Drawing.Size(125, 22);
             this.textBoxForCoefficient.TabIndex = 9;
+            this.textBoxForCoefficient.Text = "2";
             // 
             // textBoxForLeftBorder
             // 
@@ -213,6 +219,7 @@ namespace laboratory_3 {
             this.textBoxForLeftBorder.Name = "textBoxForLeftBorder";
             this.textBoxForLeftBorder.Size = new System.Drawing.Size(125, 22);
             this.textBoxForLeftBorder.TabIndex = 10;
+            this.textBoxForLeftBorder.Text = "-5";
             // 
             // textBoxForRightBorder
             // 
@@ -221,6 +228,7 @@ namespace laboratory_3 {
             this.textBoxForRightBorder.Name = "textBoxForRightBorder";
             this.textBoxForRightBorder.Size = new System.Drawing.Size(125, 22);
             this.textBoxForRightBorder.TabIndex = 11;
+            this.textBoxForRightBorder.Text = "5";
             // 
             // textBoxForStep
             // 
@@ -229,30 +237,69 @@ namespace laboratory_3 {
             this.textBoxForStep.Name = "textBoxForStep";
             this.textBoxForStep.Size = new System.Drawing.Size(125, 22);
             this.textBoxForStep.TabIndex = 12;
+            this.textBoxForStep.Text = "1";
             // 
-            // chart1
+            // chart
             // 
+            this.chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
             legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(468, 48);
-            this.chart1.Name = "chart1";
+            this.chart.Legends.Add(legend1);
+            this.chart.Location = new System.Drawing.Point(456, 31);
+            this.chart.Name = "chart";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.Color.Fuchsia;
+            series1.CustomProperties = "EmptyPointValue=Zero";
             series1.Legend = "Legend1";
+            series1.MarkerBorderColor = System.Drawing.Color.White;
+            series1.MarkerColor = System.Drawing.Color.White;
             series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(300, 300);
-            this.chart1.TabIndex = 13;
-            this.chart1.Text = "chart1";
+            series1.SmartLabelStyle.Enabled = false;
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.Color = System.Drawing.Color.Red;
+            series2.Legend = "Legend1";
+            series2.Name = "Series2";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.chart.Series.Add(series1);
+            this.chart.Series.Add(series2);
+            this.chart.Size = new System.Drawing.Size(438, 399);
+            this.chart.TabIndex = 13;
+            this.chart.Text = "chart";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(29, 78);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(99, 16);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Witch of Agnesi";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::laboratory_3.Properties.Resources.Witch_of_Agnesi;
+            this.pictureBox1.Location = new System.Drawing.Point(162, 48);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(125, 68);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 360);
-            this.Controls.Add(this.chart1);
+            this.ClientSize = new System.Drawing.Size(918, 439);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.chart);
             this.Controls.Add(this.textBoxForStep);
             this.Controls.Add(this.textBoxForRightBorder);
             this.Controls.Add(this.textBoxForLeftBorder);
@@ -273,7 +320,8 @@ namespace laboratory_3 {
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,7 +350,9 @@ namespace laboratory_3 {
         private TextBox textBoxForLeftBorder;
         private TextBox textBoxForRightBorder;
         private TextBox textBoxForStep;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart;
+        private Label label1;
+        private PictureBox pictureBox1;
     }
 }
 

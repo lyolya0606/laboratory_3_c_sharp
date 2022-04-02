@@ -59,5 +59,25 @@ namespace laboratory_3.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Witch_of_Agnesi {
+            get {
+                object obj = ResourceManager.GetObject("Witch of Agnesi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Снимок_экрана_2022_04_02_184445 {
+            get {
+                object obj = ResourceManager.GetObject("Снимок экрана 2022-04-02 184445", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

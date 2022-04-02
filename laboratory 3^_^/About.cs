@@ -14,7 +14,6 @@ namespace laboratory_3 {
 
         public About(bool isAgain) {
             IsAgain = isAgain;
-            //SavingChoice();
             InitializeComponent();
         }
 
