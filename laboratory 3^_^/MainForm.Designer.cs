@@ -38,17 +38,18 @@ namespace laboratory_3 {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveDataToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelForCoefficient = new System.Windows.Forms.Label();
             this.labelForLeftBorder = new System.Windows.Forms.Label();
@@ -56,7 +57,7 @@ namespace laboratory_3 {
             this.labelForStep = new System.Windows.Forms.Label();
             this.buttonForDrawing = new System.Windows.Forms.Button();
             this.buttonForDeleting = new System.Windows.Forms.Button();
-            this.buttonForTable = new System.Windows.Forms.Button();
+            this.buttonForShowingTable = new System.Windows.Forms.Button();
             this.textBoxForCoefficient = new System.Windows.Forms.TextBox();
             this.textBoxForLeftBorder = new System.Windows.Forms.TextBox();
             this.textBoxForRightBorder = new System.Windows.Forms.TextBox();
@@ -64,9 +65,12 @@ namespace laboratory_3 {
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.buttonForDeletingTable = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -74,7 +78,7 @@ namespace laboratory_3 {
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Location = new System.Drawing.Point(0, 28);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(918, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1213, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,7 +90,7 @@ namespace laboratory_3 {
             this.aboutToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(918, 28);
+            this.menuStrip2.Size = new System.Drawing.Size(1213, 28);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -94,39 +98,49 @@ namespace laboratory_3 {
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.readDataToolStripMenuItem,
-            this.saveDataToolStripMenuItem});
+            this.saveDataToolStripMenuItem,
+            this.saveDataToExcelToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
-            this.fileToolStripMenuItem.Click += new System.EventHandler(this.FileToolStripMenuItem_Click);
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.FileToolStripMenuItemClick);
             // 
             // readDataToolStripMenuItem
             // 
             this.readDataToolStripMenuItem.Name = "readDataToolStripMenuItem";
-            this.readDataToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.readDataToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.readDataToolStripMenuItem.Text = "Read data";
+            this.readDataToolStripMenuItem.Click += new System.EventHandler(this.ReadDataToolStripMenuItemClick);
             // 
             // saveDataToolStripMenuItem
             // 
             this.saveDataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtToolStripMenuItem,
-            this.excelToolStripMenuItem});
+            this.inputToolStripMenuItem,
+            this.outputToolStripMenuItem});
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
-            this.saveDataToolStripMenuItem.Text = "Save data to";
+            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveDataToolStripMenuItem.Text = "Save data to txt";
+            this.saveDataToolStripMenuItem.Click += new System.EventHandler(this.saveDataToolStripMenuItem_Click);
             // 
-            // txtToolStripMenuItem
+            // inputToolStripMenuItem
             // 
-            this.txtToolStripMenuItem.Name = "txtToolStripMenuItem";
-            this.txtToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
-            this.txtToolStripMenuItem.Text = "txt";
-            this.txtToolStripMenuItem.Click += new System.EventHandler(this.TxtToolStripMenuItemClick);
+            this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.inputToolStripMenuItem.Text = "Input";
+            this.inputToolStripMenuItem.Click += new System.EventHandler(this.IntputToolStripMenuItemClick);
             // 
-            // excelToolStripMenuItem
+            // outputToolStripMenuItem
             // 
-            this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(126, 26);
-            this.excelToolStripMenuItem.Text = "excel";
+            this.outputToolStripMenuItem.Name = "outputToolStripMenuItem";
+            this.outputToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.outputToolStripMenuItem.Text = "Output";
+            this.outputToolStripMenuItem.Click += new System.EventHandler(this.OutputToolStripMenuItemClick);
+            // 
+            // saveDataToExcelToolStripMenuItem
+            // 
+            this.saveDataToExcelToolStripMenuItem.Name = "saveDataToExcelToolStripMenuItem";
+            this.saveDataToExcelToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveDataToExcelToolStripMenuItem.Text = "Save data to excel";
             // 
             // aboutToolStripMenuItem
             // 
@@ -173,7 +187,7 @@ namespace laboratory_3 {
             // 
             // buttonForDrawing
             // 
-            this.buttonForDrawing.Location = new System.Drawing.Point(29, 317);
+            this.buttonForDrawing.Location = new System.Drawing.Point(32, 359);
             this.buttonForDrawing.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonForDrawing.Name = "buttonForDrawing";
             this.buttonForDrawing.Size = new System.Drawing.Size(108, 34);
@@ -184,24 +198,25 @@ namespace laboratory_3 {
             // 
             // buttonForDeleting
             // 
-            this.buttonForDeleting.Location = new System.Drawing.Point(169, 317);
+            this.buttonForDeleting.Location = new System.Drawing.Point(169, 359);
             this.buttonForDeleting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonForDeleting.Name = "buttonForDeleting";
             this.buttonForDeleting.Size = new System.Drawing.Size(118, 34);
             this.buttonForDeleting.TabIndex = 7;
             this.buttonForDeleting.Text = "Delete a graph";
             this.buttonForDeleting.UseVisualStyleBackColor = true;
-            this.buttonForDeleting.Click += new System.EventHandler(this.ИuttonForDeletingClick);
+            this.buttonForDeleting.Click += new System.EventHandler(this.ButtonForDeletingClick);
             // 
-            // buttonForTable
+            // buttonForShowingTable
             // 
-            this.buttonForTable.Location = new System.Drawing.Point(325, 317);
-            this.buttonForTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonForTable.Name = "buttonForTable";
-            this.buttonForTable.Size = new System.Drawing.Size(108, 34);
-            this.buttonForTable.TabIndex = 8;
-            this.buttonForTable.Text = "Show a table";
-            this.buttonForTable.UseVisualStyleBackColor = true;
+            this.buttonForShowingTable.Location = new System.Drawing.Point(782, 323);
+            this.buttonForShowingTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonForShowingTable.Name = "buttonForShowingTable";
+            this.buttonForShowingTable.Size = new System.Drawing.Size(108, 34);
+            this.buttonForShowingTable.TabIndex = 8;
+            this.buttonForShowingTable.Text = "Show a table";
+            this.buttonForShowingTable.UseVisualStyleBackColor = true;
+            this.buttonForShowingTable.Click += new System.EventHandler(this.ButtonForTableClick);
             // 
             // textBoxForCoefficient
             // 
@@ -237,38 +252,37 @@ namespace laboratory_3 {
             this.textBoxForStep.Name = "textBoxForStep";
             this.textBoxForStep.Size = new System.Drawing.Size(125, 22);
             this.textBoxForStep.TabIndex = 12;
-            this.textBoxForStep.Text = "1";
+            this.textBoxForStep.Text = "0.01";
             // 
             // chart
             // 
-            this.chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.chart.Legends.Add(legend1);
-            this.chart.Location = new System.Drawing.Point(456, 31);
+            chartArea4.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea4);
+            legend4.Enabled = false;
+            legend4.Name = "Legend1";
+            this.chart.Legends.Add(legend4);
+            this.chart.Location = new System.Drawing.Point(325, 28);
             this.chart.Name = "chart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Color = System.Drawing.Color.Fuchsia;
-            series1.CustomProperties = "EmptyPointValue=Zero";
-            series1.Legend = "Legend1";
-            series1.MarkerBorderColor = System.Drawing.Color.White;
-            series1.MarkerColor = System.Drawing.Color.White;
-            series1.Name = "Series1";
-            series1.SmartLabelStyle.Enabled = false;
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series2.Color = System.Drawing.Color.Red;
-            series2.Legend = "Legend1";
-            series2.Name = "Series2";
-            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.chart.Series.Add(series1);
-            this.chart.Series.Add(series2);
+            series7.BorderWidth = 3;
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series7.Color = System.Drawing.Color.Fuchsia;
+            series7.CustomProperties = "EmptyPointValue=Zero";
+            series7.Legend = "Legend1";
+            series7.MarkerBorderColor = System.Drawing.Color.White;
+            series7.MarkerColor = System.Drawing.Color.White;
+            series7.Name = "Series1";
+            series7.SmartLabelStyle.Enabled = false;
+            series7.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series8.Color = System.Drawing.Color.Red;
+            series8.Legend = "Legend1";
+            series8.Name = "Series2";
+            series8.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series8.YValuesPerPoint = 2;
+            this.chart.Series.Add(series7);
+            this.chart.Series.Add(series8);
             this.chart.Size = new System.Drawing.Size(438, 399);
             this.chart.TabIndex = 13;
             this.chart.Text = "chart";
@@ -292,11 +306,34 @@ namespace laboratory_3 {
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(911, 28);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(290, 399);
+            this.dataGridView1.TabIndex = 17;
+            // 
+            // buttonForDeletingTable
+            // 
+            this.buttonForDeletingTable.Location = new System.Drawing.Point(782, 378);
+            this.buttonForDeletingTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonForDeletingTable.Name = "buttonForDeletingTable";
+            this.buttonForDeletingTable.Size = new System.Drawing.Size(108, 34);
+            this.buttonForDeletingTable.TabIndex = 18;
+            this.buttonForDeletingTable.Text = "Delete a table";
+            this.buttonForDeletingTable.UseVisualStyleBackColor = true;
+            this.buttonForDeletingTable.Click += new System.EventHandler(this.ButtonForDeletingTableClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 439);
+            this.ClientSize = new System.Drawing.Size(1213, 459);
+            this.Controls.Add(this.buttonForDeletingTable);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chart);
@@ -304,7 +341,7 @@ namespace laboratory_3 {
             this.Controls.Add(this.textBoxForRightBorder);
             this.Controls.Add(this.textBoxForLeftBorder);
             this.Controls.Add(this.textBoxForCoefficient);
-            this.Controls.Add(this.buttonForTable);
+            this.Controls.Add(this.buttonForShowingTable);
             this.Controls.Add(this.buttonForDeleting);
             this.Controls.Add(this.buttonForDrawing);
             this.Controls.Add(this.labelForStep);
@@ -313,15 +350,18 @@ namespace laboratory_3 {
             this.Controls.Add(this.labelForCoefficient);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.menuStrip2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AskingForClosing);
+            this.MaximizeBox = false;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,8 +376,8 @@ namespace laboratory_3 {
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem readDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem txtToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem outputToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private Label labelForCoefficient;
         private Label labelForLeftBorder;
@@ -345,7 +385,7 @@ namespace laboratory_3 {
         private Label labelForStep;
         private Button buttonForDrawing;
         private Button buttonForDeleting;
-        private Button buttonForTable;
+        private Button buttonForShowingTable;
         private TextBox textBoxForCoefficient;
         private TextBox textBoxForLeftBorder;
         private TextBox textBoxForRightBorder;
@@ -353,6 +393,9 @@ namespace laboratory_3 {
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
         private Label label1;
         private PictureBox pictureBox1;
+        private ToolStripMenuItem saveDataToExcelToolStripMenuItem;
+        private DataGridView dataGridView1;
+        private Button buttonForDeletingTable;
     }
 }
 

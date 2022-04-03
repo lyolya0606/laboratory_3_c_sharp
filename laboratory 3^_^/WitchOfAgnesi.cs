@@ -30,5 +30,13 @@ namespace laboratory_3 {
                 return false;
             }
         }
+
+        public Dictionary<double, double>  GetPairs() {
+            Dictionary<double, double> pairs = new Dictionary<double, double>();
+            for (double x = leftBorder; x <= rightBorder; x += step) {
+                pairs.Add(x, CountingFunction(x));
+            }
+            return pairs;
+        }
     }
 }

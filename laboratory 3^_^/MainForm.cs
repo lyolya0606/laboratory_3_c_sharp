@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace laboratory_3 {
     public partial class MainForm : Form {
+        private const int PARAMETERS = 4;
         public MainForm() {
             InitializeComponent();
             GreetingWorker();
@@ -20,7 +21,7 @@ namespace laboratory_3 {
 
         }
 
-        private void FileToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void FileToolStripMenuItemClick(object sender, EventArgs e) {
             double leftBorder = 0;
             double rightBorder = 0;
             double step = 0;
@@ -45,8 +46,13 @@ namespace laboratory_3 {
                 stop = false;
             }
             if (stop == false) {
-                txtToolStripMenuItem.Enabled = false;
-                excelToolStripMenuItem.Enabled = false;
+                inputToolStripMenuItem.Enabled = false;
+                outputToolStripMenuItem.Enabled = false;
+                saveDataToExcelToolStripMenuItem.Enabled = false;
+            }
+
+            if (dataGridView1.DataSource == null) {
+                saveDataToExcelToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -106,21 +112,27 @@ namespace laboratory_3 {
             chart.Series[0].Points.Clear();
             chart.Series[1].Points.Clear();
 
-            for (double x = leftBorder; x < rightBorder; x += step) {
-                chart.Series[0].Points.AddXY(x, witchOfAgnesi.CountingFunction(x));
+            foreach (var pair in witchOfAgnesi.GetPairs()) {
+                chart.Series[0].Points.AddXY(pair.Key, pair.Value);
             }
 
             if (witchOfAgnesi.IsSpecialSituation()) {
-                chart.Series[1].Points.AddXY(0.0, 0.0);
+                chart.Series[1].Points.AddXY(0.00001, 0.0);
             }
         }
 
 
-        private void TxtToolStripMenuItemClick(object sender, EventArgs e) {
+        private void IntputToolStripMenuItemClick(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog() {
                 InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
             };
+
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+                if (saveFileDialog.FileName == @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug\CheckBox.txt") {
+                    MessageBox.Show("This file cannot be opened!", "Warning!");
+                    return;
+                }
+
                 using (var sr = new StreamWriter(saveFileDialog.FileName)) {
                     sr.WriteLine(textBoxForCoefficient.Text);
                     sr.WriteLine(textBoxForLeftBorder.Text);
@@ -135,9 +147,107 @@ namespace laboratory_3 {
             
         }
 
-        private void ИuttonForDeletingClick(object sender, EventArgs e) {
+        private void ButtonForDeletingClick(object sender, EventArgs e) {
             chart.Series[0].Points.Clear();
             chart.Series[1].Points.Clear();
+        }
+
+        private void saveDataToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void ReadDataToolStripMenuItemClick(object sender, EventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog() {
+                InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
+            };
+            if (openFileDialog.ShowDialog() != DialogResult.OK) {
+                MessageBox.Show("File was not read!", "Warning!");
+                return;
+            }
+
+            if (openFileDialog.FileName == @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug\CheckBox.txt") {
+                MessageBox.Show("This file cannot be opened!", "Warning!");
+                return;
+            }
+            using (StreamReader streamReader = new StreamReader(openFileDialog.FileName)) {
+                ReadDataFromFile(streamReader);
+            }
+            CheckingData();
+        }
+
+        private void ReadDataFromFile(StreamReader streamReader) {
+            List<double> data = new List<double>();
+            for (int i = 0; i < PARAMETERS; i++) {
+                try {
+                    data.Add(double.Parse(streamReader.ReadLine()));
+                } catch (FormatException) {
+                    MessageBox.Show("File has incorrect data!", "Warning!");
+                    return;
+                }
+            }
+
+            if (data.Count != PARAMETERS) {
+                MessageBox.Show("File has incorrect data!", "Warning!");
+                return;
+            }
+
+            textBoxForCoefficient.Text = data[0].ToString();
+            textBoxForLeftBorder.Text = data[1].ToString();
+            textBoxForRightBorder.Text = data[2].ToString();
+            textBoxForStep.Text = data[3].ToString();
+        }
+
+        private int GetDecimalDigitsCount(double number) {
+            string[] str = number.ToString(new System.Globalization.NumberFormatInfo() {
+                NumberDecimalSeparator = "." }).Split('.');
+            return str.Length == 2 ? str[1].Length : 0;
+        }
+
+        private void ButtonForTableClick(object sender, EventArgs e) {
+            DataTable dotTable = new DataTable();
+            dotTable.Columns.Add("X", typeof(double));
+            dotTable.Columns.Add("Y", typeof(double));
+            int countOfRound = GetDecimalDigitsCount(double.Parse(textBoxForStep.Text));
+            WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text), 
+                double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
+            foreach (var pair in witchOfAgnesi.GetPairs()) {
+                dotTable.Rows.Add(Math.Round(pair.Key, countOfRound), Math.Round(pair.Value, countOfRound));
+            }
+            dataGridView1.DataSource = dotTable;
+            outputToolStripMenuItem.Enabled = true;
+            saveDataToExcelToolStripMenuItem.Enabled = true;
+        }
+
+        private void ButtonForDeletingTableClick(object sender, EventArgs e) {
+            dataGridView1.DataSource = null;
+            outputToolStripMenuItem.Enabled = false;
+            saveDataToExcelToolStripMenuItem.Enabled = false;
+        }
+
+        private void OutputToolStripMenuItemClick(object sender, EventArgs e) {
+            WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text), 
+                double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
+            int countOfRound = GetDecimalDigitsCount(double.Parse(textBoxForStep.Text));
+            SaveFileDialog saveFileDialog = new SaveFileDialog() {
+                InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+                if (saveFileDialog.FileName == @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug\CheckBox.txt") {
+                    MessageBox.Show("This file cannot be opened!", "Warning!");
+                    return;
+                }
+
+                using (var sr = new StreamWriter(saveFileDialog.FileName)) {
+                    foreach (var pair in witchOfAgnesi.GetPairs()) {
+                        sr.WriteLine(Math.Round(pair.Key, countOfRound) + " " + Math.Round(pair.Value, countOfRound));
+                    }
+                }
+                MessageBox.Show("File was successfully saved!", "Saving!");
+            }
+            else {
+                MessageBox.Show("File was not saved!", "Warning!");
+            }
         }
     }
 }

@@ -27,24 +27,14 @@ namespace laboratory_3 {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.label1 = new System.Windows.Forms.Label();
             this.checkBox = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(93, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "hello im lyolya";
             // 
             // checkBox
             // 
             this.checkBox.AutoSize = true;
-            this.checkBox.Location = new System.Drawing.Point(93, 117);
+            this.checkBox.Location = new System.Drawing.Point(177, 127);
             this.checkBox.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox.Name = "checkBox";
             this.checkBox.Size = new System.Drawing.Size(131, 20);
@@ -53,25 +43,26 @@ namespace laboratory_3 {
             this.checkBox.UseVisualStyleBackColor = true;
             this.checkBox.CheckedChanged += new System.EventHandler(this.CheckBoxCheckedChanged);
             // 
-            // label2
+            // textBox1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(161, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "hello";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.textBox1.Location = new System.Drawing.Point(14, 22);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(294, 90);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.Text = "Laboratory work 3, Variant 1\r\nThe program draws a graph of Witch of Agnesy\r\nStude" +
+    "nt of group number 403\r\nBezdudnaya Olga\r\n2022\r\n";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 178);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(320, 157);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.checkBox);
-            this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.MaximizeBox = false;
             this.Name = "About";
             this.Text = "About";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingAbout);
@@ -81,9 +72,7 @@ namespace laboratory_3 {
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBox;
-        private Label label2;
+        private TextBox textBox1;
     }
 }

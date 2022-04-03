@@ -37,8 +37,5 @@ namespace laboratory_3 {
 
         }
 
-        private void label2_Click(object sender, EventArgs e) {
-
-        }
     }
 }
