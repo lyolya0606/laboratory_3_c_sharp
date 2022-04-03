@@ -38,10 +38,10 @@ namespace laboratory_3 {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,14 +125,14 @@ namespace laboratory_3 {
             // inputToolStripMenuItem
             // 
             this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
-            this.inputToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
             this.inputToolStripMenuItem.Text = "Input";
             this.inputToolStripMenuItem.Click += new System.EventHandler(this.IntputToolStripMenuItemClick);
             // 
             // outputToolStripMenuItem
             // 
             this.outputToolStripMenuItem.Name = "outputToolStripMenuItem";
-            this.outputToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.outputToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
             this.outputToolStripMenuItem.Text = "Output";
             this.outputToolStripMenuItem.Click += new System.EventHandler(this.OutputToolStripMenuItemClick);
             // 
@@ -141,6 +141,7 @@ namespace laboratory_3 {
             this.saveDataToExcelToolStripMenuItem.Name = "saveDataToExcelToolStripMenuItem";
             this.saveDataToExcelToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.saveDataToExcelToolStripMenuItem.Text = "Save data to excel";
+            this.saveDataToExcelToolStripMenuItem.Click += new System.EventHandler(this.SaveDataToExcelToolStripMenuItemClick);
             // 
             // aboutToolStripMenuItem
             // 
@@ -252,37 +253,37 @@ namespace laboratory_3 {
             this.textBoxForStep.Name = "textBoxForStep";
             this.textBoxForStep.Size = new System.Drawing.Size(125, 22);
             this.textBoxForStep.TabIndex = 12;
-            this.textBoxForStep.Text = "0.01";
+            this.textBoxForStep.Text = "0.1";
             // 
             // chart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea4);
-            legend4.Enabled = false;
-            legend4.Name = "Legend1";
-            this.chart.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.chart.Legends.Add(legend1);
             this.chart.Location = new System.Drawing.Point(325, 28);
             this.chart.Name = "chart";
-            series7.BorderWidth = 3;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series7.Color = System.Drawing.Color.Fuchsia;
-            series7.CustomProperties = "EmptyPointValue=Zero";
-            series7.Legend = "Legend1";
-            series7.MarkerBorderColor = System.Drawing.Color.White;
-            series7.MarkerColor = System.Drawing.Color.White;
-            series7.Name = "Series1";
-            series7.SmartLabelStyle.Enabled = false;
-            series7.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series8.Color = System.Drawing.Color.Red;
-            series8.Legend = "Legend1";
-            series8.Name = "Series2";
-            series8.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series8.YValuesPerPoint = 2;
-            this.chart.Series.Add(series7);
-            this.chart.Series.Add(series8);
+            series1.BorderWidth = 3;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.Color.Fuchsia;
+            series1.CustomProperties = "EmptyPointValue=Zero";
+            series1.Legend = "Legend1";
+            series1.MarkerBorderColor = System.Drawing.Color.White;
+            series1.MarkerColor = System.Drawing.Color.White;
+            series1.Name = "Series1";
+            series1.SmartLabelStyle.Enabled = false;
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.Color = System.Drawing.Color.Red;
+            series2.Legend = "Legend1";
+            series2.Name = "Series2";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series2.YValuesPerPoint = 2;
+            this.chart.Series.Add(series1);
+            this.chart.Series.Add(series2);
             this.chart.Size = new System.Drawing.Size(438, 399);
             this.chart.TabIndex = 13;
             this.chart.Text = "chart";
@@ -353,9 +354,9 @@ namespace laboratory_3 {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AskingForClosing);
-            this.MaximizeBox = false;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();

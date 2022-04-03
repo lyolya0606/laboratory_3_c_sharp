@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace laboratory_3 {
     public partial class MainForm : Form {
@@ -126,6 +127,9 @@ namespace laboratory_3 {
             SaveFileDialog saveFileDialog = new SaveFileDialog() {
                 InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
             };
+            saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 2;
+            saveFileDialog.RestoreDirectory = true;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 if (saveFileDialog.FileName == @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug\CheckBox.txt") {
@@ -140,8 +144,7 @@ namespace laboratory_3 {
                     sr.WriteLine(textBoxForStep.Text);
                 }
                 MessageBox.Show("File was successfully saved!", "Saving!");
-            }
-            else {
+            } else {
                 MessageBox.Show("File was not saved!", "Warning!");
             }
             
@@ -160,6 +163,10 @@ namespace laboratory_3 {
             OpenFileDialog openFileDialog = new OpenFileDialog() {
                 InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
             };
+            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+
             if (openFileDialog.ShowDialog() != DialogResult.OK) {
                 MessageBox.Show("File was not read!", "Warning!");
                 return;
@@ -231,6 +238,9 @@ namespace laboratory_3 {
             SaveFileDialog saveFileDialog = new SaveFileDialog() {
                 InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
             };
+            saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 2;
+            saveFileDialog.RestoreDirectory = true;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 if (saveFileDialog.FileName == @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug\CheckBox.txt") {
@@ -244,10 +254,58 @@ namespace laboratory_3 {
                     }
                 }
                 MessageBox.Show("File was successfully saved!", "Saving!");
-            }
-            else {
+            } else {
                 MessageBox.Show("File was not saved!", "Warning!");
             }
         }
+
+        private void SaveDataToExcelToolStripMenuItemClick(object sender, EventArgs e) {
+            WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text),
+                double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
+            int countOfRound = GetDecimalDigitsCount(double.Parse(textBoxForStep.Text));
+            SaveFileDialog saveFileDialog = new SaveFileDialog() { 
+                InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
+            };
+            saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.xlsx)|*.xlsx";
+            saveFileDialog.FilterIndex = 2;
+            saveFileDialog.RestoreDirectory = true;
+            var filePath = "";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+                filePath = saveFileDialog.FileName;
+
+                using (ExcelWork excelWork = new ExcelWork()) {
+                    if (excelWork.Open(filePath)) {
+                        excelWork.SetData("A", 1, "a");
+                        excelWork.SetData("B", 1, textBoxForCoefficient.Text);
+                        excelWork.SetData("A", 2, "left");
+                        excelWork.SetData("B", 2, textBoxForLeftBorder.Text);
+                        excelWork.SetData("A", 3, "right");
+                        excelWork.SetData("B", 3, textBoxForRightBorder.Text);
+                        excelWork.SetData("A", 4, "step");
+                        excelWork.SetData("B", 4, textBoxForStep.Text);
+                        excelWork.SetData("A", 6, "Y");
+                        excelWork.SetData("B", 6, "X");
+
+                        int count = 7;
+                        foreach (var pair in witchOfAgnesi.GetPairs()) {
+                            excelWork.SetData("A", count, Math.Round(pair.Key, countOfRound));
+                            excelWork.SetData("B", count, Math.Round(pair.Value, countOfRound));
+                            count++;
+                        }
+
+                        //excelWork.DrawInExcel();
+
+                        
+
+                        excelWork.Save();
+                    }
+                }
+                MessageBox.Show("Excel was successfully saved!", "Saving!");
+            } else {
+                MessageBox.Show("File was not saved!", "Warning!");
+            }         
+
+        }
     }
+    
 }
