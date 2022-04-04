@@ -110,10 +110,7 @@ namespace laboratory_3 {
             foreach (var pair in witchOfAgnesi.GetPairs()) {
                 chart.Series[0].Points.AddXY(pair.Key, pair.Value);
             }
-
-            if (witchOfAgnesi.IsSpecialSituation()) {
-                chart.Series[1].Points.AddXY(0.0, 0.0);
-            }
+            ShowTable();
         }
 
 
@@ -197,14 +194,14 @@ namespace laboratory_3 {
             textBoxForStep.Text = data[3].ToString();
         }
 
-        private void ButtonForTableClick(object sender, EventArgs e) {
+        private void ShowTable() {
             DataTable dotTable = new DataTable();
             dotTable.Columns.Add("X", typeof(double));
             dotTable.Columns.Add("Y", typeof(double));
             WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text), 
                 double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
             foreach (var pair in witchOfAgnesi.GetPairs()) {
-                dotTable.Rows.Add(Math.Round(pair.Key, 4), Math.Round(pair.Value, 4));
+                dotTable.Rows.Add(Math.Round(pair.Key, 4), pair.Value);
             }
             dataGridView1.DataSource = dotTable;
             outputToolStripMenuItem.Enabled = true;
@@ -230,7 +227,7 @@ namespace laboratory_3 {
 
                 using (var sr = new StreamWriter(saveFileDialog.FileName)) {
                     foreach (var pair in witchOfAgnesi.GetPairs()) {
-                        sr.WriteLine(Math.Round(pair.Key, 4) + " " + Math.Round(pair.Value, 4));
+                        sr.WriteLine(Math.Round(pair.Key, 4) + " " + pair.Value);
                     }
                 }
                 MessageBox.Show("File was successfully saved!", "Saving!");
@@ -267,15 +264,18 @@ namespace laboratory_3 {
 
                         int count = 7;
                         foreach (var pair in witchOfAgnesi.GetPairs()) {
-                            excelWork.SetData("A", count, Math.Round(pair.Key, 4));
-                            excelWork.SetData("B", count, Math.Round(pair.Value, 4));
+                            excelWork.SetData("A", count, Math.Round(pair.Key, 4).ToString());
+                            if (double.IsNaN(pair.Value)) {
+                                excelWork.SetData("B", count, "");
+                            } else {
+                                excelWork.SetData("B", count, pair.Value.ToString());
+                            }
                             count++;
                         }
 
                         excelWork.DrawInExcel(witchOfAgnesi.GetPairs().Count);                    
 
                         excelWork.Save();
-                        excelWork.Dispose();
                     }
                 }
                 MessageBox.Show("Excel was successfully saved!", "Saving!");

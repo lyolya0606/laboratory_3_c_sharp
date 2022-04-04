@@ -42,6 +42,7 @@ namespace laboratory_3 {
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +58,6 @@ namespace laboratory_3 {
             this.labelForStep = new System.Windows.Forms.Label();
             this.buttonForDrawing = new System.Windows.Forms.Button();
             this.buttonForDeleting = new System.Windows.Forms.Button();
-            this.buttonForShowingTable = new System.Windows.Forms.Button();
             this.textBoxForCoefficient = new System.Windows.Forms.TextBox();
             this.textBoxForLeftBorder = new System.Windows.Forms.TextBox();
             this.textBoxForRightBorder = new System.Windows.Forms.TextBox();
@@ -77,7 +77,7 @@ namespace laboratory_3 {
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Location = new System.Drawing.Point(0, 28);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1213, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1174, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -89,7 +89,7 @@ namespace laboratory_3 {
             this.aboutToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(1213, 28);
+            this.menuStrip2.Size = new System.Drawing.Size(1174, 28);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -118,7 +118,7 @@ namespace laboratory_3 {
             this.outputToolStripMenuItem});
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
             this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
-            this.saveDataToolStripMenuItem.Text = "Save data to txt";           
+            this.saveDataToolStripMenuItem.Text = "Save data to txt";
             // 
             // inputToolStripMenuItem
             // 
@@ -191,7 +191,7 @@ namespace laboratory_3 {
             this.buttonForDrawing.Name = "buttonForDrawing";
             this.buttonForDrawing.Size = new System.Drawing.Size(108, 45);
             this.buttonForDrawing.TabIndex = 6;
-            this.buttonForDrawing.Text = "Draw a graph";
+            this.buttonForDrawing.Text = "Show a graph and a table";
             this.buttonForDrawing.UseVisualStyleBackColor = true;
             this.buttonForDrawing.Click += new System.EventHandler(this.ButtonForDrawingClick);
             // 
@@ -205,17 +205,6 @@ namespace laboratory_3 {
             this.buttonForDeleting.Text = "Delete a graph and a table";
             this.buttonForDeleting.UseVisualStyleBackColor = true;
             this.buttonForDeleting.Click += new System.EventHandler(this.ButtonForDeletingClick);
-            // 
-            // buttonForShowingTable
-            // 
-            this.buttonForShowingTable.Location = new System.Drawing.Point(786, 359);
-            this.buttonForShowingTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonForShowingTable.Name = "buttonForShowingTable";
-            this.buttonForShowingTable.Size = new System.Drawing.Size(106, 45);
-            this.buttonForShowingTable.TabIndex = 8;
-            this.buttonForShowingTable.Text = "Show a table";
-            this.buttonForShowingTable.UseVisualStyleBackColor = true;
-            this.buttonForShowingTable.Click += new System.EventHandler(this.ButtonForTableClick);
             // 
             // textBoxForCoefficient
             // 
@@ -308,18 +297,18 @@ namespace laboratory_3 {
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(911, 28);
+            this.dataGridView1.Location = new System.Drawing.Point(817, 28);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(290, 399);
+            this.dataGridView1.Size = new System.Drawing.Size(325, 399);
             this.dataGridView1.TabIndex = 17;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1213, 459);
+            this.ClientSize = new System.Drawing.Size(1174, 459);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
@@ -328,7 +317,6 @@ namespace laboratory_3 {
             this.Controls.Add(this.textBoxForRightBorder);
             this.Controls.Add(this.textBoxForLeftBorder);
             this.Controls.Add(this.textBoxForCoefficient);
-            this.Controls.Add(this.buttonForShowingTable);
             this.Controls.Add(this.buttonForDeleting);
             this.Controls.Add(this.buttonForDrawing);
             this.Controls.Add(this.labelForStep);
@@ -338,10 +326,12 @@ namespace laboratory_3 {
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.menuStrip2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.Text = "Witch";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AskingForClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip2.ResumeLayout(false);
@@ -372,7 +362,6 @@ namespace laboratory_3 {
         private Label labelForStep;
         private Button buttonForDrawing;
         private Button buttonForDeleting;
-        private Button buttonForShowingTable;
         private TextBox textBoxForCoefficient;
         private TextBox textBoxForLeftBorder;
         private TextBox textBoxForRightBorder;

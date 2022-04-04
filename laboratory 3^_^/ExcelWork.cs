@@ -15,15 +15,10 @@ namespace laboratory_3 {
         }
 
         public bool Open(string fileName) {
-            try {
-                if (File.Exists(fileName)) {
-                    workbook = excel.Workbooks.Open(fileName);
-
-                } else {
-                    workbook = excel.Workbooks.Add();
-                    filePath = fileName;
-                }
-                return true;
+            try {                
+            workbook = excel.Workbooks.Add();
+            filePath = fileName;                
+            return true;
             } catch (Exception) {
                 return false;
             }
@@ -39,7 +34,7 @@ namespace laboratory_3 {
             }
         }
 
-        public void SetData(string column, int row, object data) {
+        public void SetData(string column, int row, string data) {
             ((Excel.Worksheet)excel.ActiveSheet).Cells[row, column] = data;
         }
 
@@ -58,8 +53,10 @@ namespace laboratory_3 {
         }
 
         public void Dispose() {
-            workbook.Close();
-            excel.Quit();
+            try {
+                workbook.Close();
+                excel.Quit();
+            } catch { }
         }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace laboratory_3 {
-    class WitchOfAgnesi {
+    public class WitchOfAgnesi {
         private double coefficient;
         private double leftBorder;
         private double rightBorder;
@@ -20,15 +17,10 @@ namespace laboratory_3 {
         }
 
         public double CountingFunction(double x) {
-            return Math.Pow(coefficient, 3) / (Math.Pow(coefficient, 2) + Math.Pow(x, 2));
-        }
-
-        public bool IsSpecialSituation() {
-            if (coefficient == 0 && leftBorder <= 0 && rightBorder >= 0) {
-                return true;
-            } else {
-                return false;
+            if (Math.Abs(coefficient) < 0.0001 && Math.Abs(x) < 0.0001) {
+                return Double.NaN;
             }
+            return Math.Round(Math.Pow(coefficient, 3) / (Math.Pow(coefficient, 2) + Math.Pow(x, 2)), 4);
         }
 
         public Dictionary<double, double>  GetPairs() {
