@@ -1,14 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
 
 namespace laboratory_3 {
     public partial class MainForm : Form {
@@ -118,7 +112,7 @@ namespace laboratory_3 {
             }
 
             if (witchOfAgnesi.IsSpecialSituation()) {
-                chart.Series[1].Points.AddXY(0.00001, 0.0);
+                chart.Series[1].Points.AddXY(0.0, 0.0);
             }
         }
 
@@ -153,10 +147,9 @@ namespace laboratory_3 {
         private void ButtonForDeletingClick(object sender, EventArgs e) {
             chart.Series[0].Points.Clear();
             chart.Series[1].Points.Clear();
-        }
-
-        private void saveDataToolStripMenuItem_Click(object sender, EventArgs e) {
-
+            dataGridView1.DataSource = null;
+            outputToolStripMenuItem.Enabled = false;
+            saveDataToExcelToolStripMenuItem.Enabled = false;
         }
 
         private void ReadDataToolStripMenuItemClick(object sender, EventArgs e) {
@@ -204,37 +197,24 @@ namespace laboratory_3 {
             textBoxForStep.Text = data[3].ToString();
         }
 
-        private int GetDecimalDigitsCount(double number) {
-            string[] str = number.ToString(new System.Globalization.NumberFormatInfo() {
-                NumberDecimalSeparator = "." }).Split('.');
-            return str.Length == 2 ? str[1].Length : 0;
-        }
-
         private void ButtonForTableClick(object sender, EventArgs e) {
             DataTable dotTable = new DataTable();
             dotTable.Columns.Add("X", typeof(double));
             dotTable.Columns.Add("Y", typeof(double));
-            int countOfRound = GetDecimalDigitsCount(double.Parse(textBoxForStep.Text));
             WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text), 
                 double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
             foreach (var pair in witchOfAgnesi.GetPairs()) {
-                dotTable.Rows.Add(Math.Round(pair.Key, countOfRound), Math.Round(pair.Value, countOfRound));
+                dotTable.Rows.Add(Math.Round(pair.Key, 4), Math.Round(pair.Value, 4));
             }
             dataGridView1.DataSource = dotTable;
             outputToolStripMenuItem.Enabled = true;
             saveDataToExcelToolStripMenuItem.Enabled = true;
         }
 
-        private void ButtonForDeletingTableClick(object sender, EventArgs e) {
-            dataGridView1.DataSource = null;
-            outputToolStripMenuItem.Enabled = false;
-            saveDataToExcelToolStripMenuItem.Enabled = false;
-        }
 
         private void OutputToolStripMenuItemClick(object sender, EventArgs e) {
             WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text), 
                 double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
-            int countOfRound = GetDecimalDigitsCount(double.Parse(textBoxForStep.Text));
             SaveFileDialog saveFileDialog = new SaveFileDialog() {
                 InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
             };
@@ -250,7 +230,7 @@ namespace laboratory_3 {
 
                 using (var sr = new StreamWriter(saveFileDialog.FileName)) {
                     foreach (var pair in witchOfAgnesi.GetPairs()) {
-                        sr.WriteLine(Math.Round(pair.Key, countOfRound) + " " + Math.Round(pair.Value, countOfRound));
+                        sr.WriteLine(Math.Round(pair.Key, 4) + " " + Math.Round(pair.Value, 4));
                     }
                 }
                 MessageBox.Show("File was successfully saved!", "Saving!");
@@ -262,7 +242,6 @@ namespace laboratory_3 {
         private void SaveDataToExcelToolStripMenuItemClick(object sender, EventArgs e) {
             WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text),
                 double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
-            int countOfRound = GetDecimalDigitsCount(double.Parse(textBoxForStep.Text));
             SaveFileDialog saveFileDialog = new SaveFileDialog() { 
                 InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
             };
@@ -272,7 +251,7 @@ namespace laboratory_3 {
             var filePath = "";
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 filePath = saveFileDialog.FileName;
-
+                File.Delete(filePath);
                 using (ExcelWork excelWork = new ExcelWork()) {
                     if (excelWork.Open(filePath)) {
                         excelWork.SetData("A", 1, "a");
@@ -288,16 +267,15 @@ namespace laboratory_3 {
 
                         int count = 7;
                         foreach (var pair in witchOfAgnesi.GetPairs()) {
-                            excelWork.SetData("A", count, Math.Round(pair.Key, countOfRound));
-                            excelWork.SetData("B", count, Math.Round(pair.Value, countOfRound));
+                            excelWork.SetData("A", count, Math.Round(pair.Key, 4));
+                            excelWork.SetData("B", count, Math.Round(pair.Value, 4));
                             count++;
                         }
 
-                        //excelWork.DrawInExcel();
-
-                        
+                        excelWork.DrawInExcel(witchOfAgnesi.GetPairs().Count);                    
 
                         excelWork.Save();
+                        excelWork.Dispose();
                     }
                 }
                 MessageBox.Show("Excel was successfully saved!", "Saving!");

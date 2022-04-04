@@ -66,7 +66,6 @@ namespace laboratory_3 {
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonForDeletingTable = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -108,7 +107,7 @@ namespace laboratory_3 {
             // readDataToolStripMenuItem
             // 
             this.readDataToolStripMenuItem.Name = "readDataToolStripMenuItem";
-            this.readDataToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.readDataToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
             this.readDataToolStripMenuItem.Text = "Read data";
             this.readDataToolStripMenuItem.Click += new System.EventHandler(this.ReadDataToolStripMenuItemClick);
             // 
@@ -118,9 +117,8 @@ namespace laboratory_3 {
             this.inputToolStripMenuItem,
             this.outputToolStripMenuItem});
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.saveDataToolStripMenuItem.Text = "Save data to txt";
-            this.saveDataToolStripMenuItem.Click += new System.EventHandler(this.saveDataToolStripMenuItem_Click);
+            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.saveDataToolStripMenuItem.Text = "Save data to txt";           
             // 
             // inputToolStripMenuItem
             // 
@@ -139,7 +137,7 @@ namespace laboratory_3 {
             // saveDataToExcelToolStripMenuItem
             // 
             this.saveDataToExcelToolStripMenuItem.Name = "saveDataToExcelToolStripMenuItem";
-            this.saveDataToExcelToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveDataToExcelToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
             this.saveDataToExcelToolStripMenuItem.Text = "Save data to excel";
             this.saveDataToExcelToolStripMenuItem.Click += new System.EventHandler(this.SaveDataToExcelToolStripMenuItemClick);
             // 
@@ -191,7 +189,7 @@ namespace laboratory_3 {
             this.buttonForDrawing.Location = new System.Drawing.Point(32, 359);
             this.buttonForDrawing.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonForDrawing.Name = "buttonForDrawing";
-            this.buttonForDrawing.Size = new System.Drawing.Size(108, 34);
+            this.buttonForDrawing.Size = new System.Drawing.Size(108, 45);
             this.buttonForDrawing.TabIndex = 6;
             this.buttonForDrawing.Text = "Draw a graph";
             this.buttonForDrawing.UseVisualStyleBackColor = true;
@@ -202,18 +200,18 @@ namespace laboratory_3 {
             this.buttonForDeleting.Location = new System.Drawing.Point(169, 359);
             this.buttonForDeleting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonForDeleting.Name = "buttonForDeleting";
-            this.buttonForDeleting.Size = new System.Drawing.Size(118, 34);
+            this.buttonForDeleting.Size = new System.Drawing.Size(118, 45);
             this.buttonForDeleting.TabIndex = 7;
-            this.buttonForDeleting.Text = "Delete a graph";
+            this.buttonForDeleting.Text = "Delete a graph and a table";
             this.buttonForDeleting.UseVisualStyleBackColor = true;
             this.buttonForDeleting.Click += new System.EventHandler(this.ButtonForDeletingClick);
             // 
             // buttonForShowingTable
             // 
-            this.buttonForShowingTable.Location = new System.Drawing.Point(782, 323);
+            this.buttonForShowingTable.Location = new System.Drawing.Point(786, 359);
             this.buttonForShowingTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonForShowingTable.Name = "buttonForShowingTable";
-            this.buttonForShowingTable.Size = new System.Drawing.Size(108, 34);
+            this.buttonForShowingTable.Size = new System.Drawing.Size(106, 45);
             this.buttonForShowingTable.TabIndex = 8;
             this.buttonForShowingTable.Text = "Show a table";
             this.buttonForShowingTable.UseVisualStyleBackColor = true;
@@ -317,23 +315,11 @@ namespace laboratory_3 {
             this.dataGridView1.Size = new System.Drawing.Size(290, 399);
             this.dataGridView1.TabIndex = 17;
             // 
-            // buttonForDeletingTable
-            // 
-            this.buttonForDeletingTable.Location = new System.Drawing.Point(782, 378);
-            this.buttonForDeletingTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonForDeletingTable.Name = "buttonForDeletingTable";
-            this.buttonForDeletingTable.Size = new System.Drawing.Size(108, 34);
-            this.buttonForDeletingTable.TabIndex = 18;
-            this.buttonForDeletingTable.Text = "Delete a table";
-            this.buttonForDeletingTable.UseVisualStyleBackColor = true;
-            this.buttonForDeletingTable.Click += new System.EventHandler(this.ButtonForDeletingTableClick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1213, 459);
-            this.Controls.Add(this.buttonForDeletingTable);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
@@ -396,7 +382,6 @@ namespace laboratory_3 {
         private PictureBox pictureBox1;
         private ToolStripMenuItem saveDataToExcelToolStripMenuItem;
         private DataGridView dataGridView1;
-        private Button buttonForDeletingTable;
     }
 }
 

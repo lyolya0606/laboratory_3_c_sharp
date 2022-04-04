@@ -61,6 +61,7 @@ namespace laboratory_3 {
             this.ClientSize = new System.Drawing.Size(320, 157);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.checkBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.MaximizeBox = false;
             this.Name = "About";
