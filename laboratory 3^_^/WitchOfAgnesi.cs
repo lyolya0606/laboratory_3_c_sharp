@@ -7,6 +7,7 @@ namespace laboratory_3 {
         private double leftBorder;
         private double rightBorder;
         private double step;
+        public Dictionary<double, double> pairs { get; set; }
 
         public WitchOfAgnesi(double coefficient, double leftBorder,
             double rightBorder, double step) {
@@ -25,9 +26,13 @@ namespace laboratory_3 {
 
         public Dictionary<double, double>  GetPairs() {
             Dictionary<double, double> pairs = new Dictionary<double, double>();
-            for (double x = leftBorder; x <= rightBorder; x += step) {
+            int leftSide = (int)(leftBorder / step);
+            int rightSide = (int)(rightBorder / step);
+            for (int i = leftSide; i <= rightSide; i++) {
+                double x = step * i;
                 pairs.Add(x, CountingFunction(x));
             }
+            this.pairs = pairs;
             return pairs;
         }
     }

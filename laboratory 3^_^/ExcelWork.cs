@@ -4,34 +4,36 @@ using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace laboratory_3 {
-    class ExcelWork : IDisposable {
+    class ExcelWork {
         private Application excel;
         private Workbook workbook;
         private string filePath;
         private Worksheet worksheet;
 
-        public ExcelWork() {
+        public ExcelWork(){
             excel = new Excel.Application();
         }
 
         public bool Open(string fileName) {
-            try {                
-            workbook = excel.Workbooks.Add();
-            filePath = fileName;                
-            return true;
+            try {
+                if (File.Exists(fileName)) {
+                    workbook = excel.Workbooks.Open(fileName);
+                }
+                else {
+                    workbook = excel.Workbooks.Add();
+
+                }
+                filePath = fileName;
+                return true;
             } catch (Exception) {
                 return false;
             }
         }
 
-        public void Save() {
-            if (!string.IsNullOrEmpty(filePath)) {
-                workbook.SaveAs(filePath);
-                filePath = null;
-            }
-            else {
-                workbook.Save();
-            }
+        public void Save() {                
+            workbook.SaveAs(filePath);
+            workbook.Close(true);
+            excel.Quit();
         }
 
         public void SetData(string column, int row, string data) {
@@ -50,13 +52,6 @@ namespace laboratory_3 {
             series.XValues = worksheet.get_Range("A7", "A" + (6 + number).ToString());
             series.Values = worksheet.get_Range("B7", "B" + (6 + number).ToString());
             chartPage.ChartType = XlChartType.xlLine;
-        }
-
-        public void Dispose() {
-            try {
-                workbook.Close();
-                excel.Quit();
-            } catch { }
         }
     }
 }

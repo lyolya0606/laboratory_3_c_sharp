@@ -7,6 +7,7 @@ using System.Windows.Forms;
 namespace laboratory_3 {
     public partial class MainForm : Form {
         private const int PARAMETERS = 4;
+        WitchOfAgnesi witchOfAgnesi;
         public MainForm() {
             InitializeComponent();
             GreetingWorker();
@@ -42,12 +43,12 @@ namespace laboratory_3 {
             }
             if (stop == false) {
                 inputToolStripMenuItem.Enabled = false;
-                outputToolStripMenuItem.Enabled = false;
                 saveDataToExcelToolStripMenuItem.Enabled = false;
             }
 
             if (dataGridView1.DataSource == null) {
                 saveDataToExcelToolStripMenuItem.Enabled = false;
+                outputToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -102,8 +103,7 @@ namespace laboratory_3 {
             double leftBorder = double.Parse(textBoxForLeftBorder.Text);
             double rightBorder = double.Parse(textBoxForRightBorder.Text);
             double step = double.Parse(textBoxForStep.Text);
-            WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(coefficient, leftBorder,
-                rightBorder, step);
+            witchOfAgnesi = new WitchOfAgnesi(coefficient, leftBorder, rightBorder, step);
             chart.Series[0].Points.Clear();
             chart.Series[1].Points.Clear();
 
@@ -111,6 +111,7 @@ namespace laboratory_3 {
                 chart.Series[0].Points.AddXY(pair.Key, pair.Value);
             }
             ShowTable();
+            inputToolStripMenuItem.Enabled = true;
         }
 
 
@@ -198,9 +199,7 @@ namespace laboratory_3 {
             DataTable dotTable = new DataTable();
             dotTable.Columns.Add("X", typeof(double));
             dotTable.Columns.Add("Y", typeof(double));
-            WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text), 
-                double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
-            foreach (var pair in witchOfAgnesi.GetPairs()) {
+            foreach (var pair in witchOfAgnesi.pairs) {
                 dotTable.Rows.Add(Math.Round(pair.Key, 4), pair.Value);
             }
             dataGridView1.DataSource = dotTable;
@@ -210,8 +209,6 @@ namespace laboratory_3 {
 
 
         private void OutputToolStripMenuItemClick(object sender, EventArgs e) {
-            WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text), 
-                double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
             SaveFileDialog saveFileDialog = new SaveFileDialog() {
                 InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
             };
@@ -226,7 +223,7 @@ namespace laboratory_3 {
                 }
 
                 using (var sr = new StreamWriter(saveFileDialog.FileName)) {
-                    foreach (var pair in witchOfAgnesi.GetPairs()) {
+                    foreach (var pair in witchOfAgnesi.pairs) {
                         sr.WriteLine(Math.Round(pair.Key, 4) + " " + pair.Value);
                     }
                 }
@@ -237,19 +234,23 @@ namespace laboratory_3 {
         }
 
         private void SaveDataToExcelToolStripMenuItemClick(object sender, EventArgs e) {
-            WitchOfAgnesi witchOfAgnesi = new WitchOfAgnesi(double.Parse(textBoxForCoefficient.Text),
-                double.Parse(textBoxForLeftBorder.Text), double.Parse(textBoxForRightBorder.Text), double.Parse(textBoxForStep.Text));
             SaveFileDialog saveFileDialog = new SaveFileDialog() { 
                 InitialDirectory = @"C:\Users\lyolya\source\repos\laboratory 3^_^\laboratory 3^_^\bin\Debug"
             };
             saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.xlsx)|*.xlsx";
             saveFileDialog.FilterIndex = 2;
             saveFileDialog.RestoreDirectory = true;
-            var filePath = "";
+            string filePath;
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 filePath = saveFileDialog.FileName;
-                File.Delete(filePath);
-                using (ExcelWork excelWork = new ExcelWork()) {
+                try {
+                    File.Delete(filePath);
+                }
+                catch (IOException) {
+                    MessageBox.Show("This file is opened!", "Warning!");
+                    return;
+                }
+                ExcelWork excelWork = new ExcelWork();
                     if (excelWork.Open(filePath)) {
                         excelWork.SetData("A", 1, "a");
                         excelWork.SetData("B", 1, textBoxForCoefficient.Text);
@@ -263,7 +264,7 @@ namespace laboratory_3 {
                         excelWork.SetData("B", 6, "X");
 
                         int count = 7;
-                        foreach (var pair in witchOfAgnesi.GetPairs()) {
+                        foreach (var pair in witchOfAgnesi.pairs) {
                             excelWork.SetData("A", count, Math.Round(pair.Key, 4).ToString());
                             if (double.IsNaN(pair.Value)) {
                                 excelWork.SetData("B", count, "");
@@ -273,11 +274,11 @@ namespace laboratory_3 {
                             count++;
                         }
 
-                        excelWork.DrawInExcel(witchOfAgnesi.GetPairs().Count);                    
+                        excelWork.DrawInExcel(witchOfAgnesi.pairs.Count);                    
 
                         excelWork.Save();
                     }
-                }
+                
                 MessageBox.Show("Excel was successfully saved!", "Saving!");
             } else {
                 MessageBox.Show("File was not saved!", "Warning!");
