@@ -18,13 +18,14 @@ namespace laboratory_3 {
         }
 
         private void FileToolStripMenuItemClick(object sender, EventArgs e) {
+            double coefficient = 0;
             double leftBorder = 0;
             double rightBorder = 0;
             double step = 0;
             bool stop = true;
 
             try {
-                double.Parse(textBoxForCoefficient.Text);
+                coefficient = double.Parse(textBoxForCoefficient.Text);
                 leftBorder = double.Parse(textBoxForLeftBorder.Text);
                 rightBorder = double.Parse(textBoxForRightBorder.Text);
                 step = double.Parse(textBoxForStep.Text);
@@ -34,6 +35,11 @@ namespace laboratory_3 {
             }
 
             Check check = new Check();
+            if (!check.CheckCoefficient(coefficient)) {
+                MessageBox.Show("The coefficient should be in the range from -100 to 100", "Warning!");
+                stop = false;
+            }
+
             if (!check.CheckInterval(leftBorder, rightBorder)) {
                 stop = false;
             }
@@ -52,7 +58,7 @@ namespace laboratory_3 {
             }
         }
 
-        private void AboutToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void AboutToolStripMenuItemClick(object sender, EventArgs e) {
             About about = new About(true);
             about.SavingChoice();
             about.ShowDialog();
@@ -66,13 +72,15 @@ namespace laboratory_3 {
         }
 
         private bool CheckingData() {
+            double coefficient;
             double leftBorder;
             double rightBorder;
             double step;
             bool stop = true;
+            Check check = new Check();
 
             try {
-                double.Parse(textBoxForCoefficient.Text);
+                coefficient = double.Parse(textBoxForCoefficient.Text);
                 leftBorder = double.Parse(textBoxForLeftBorder.Text);
                 rightBorder = double.Parse(textBoxForRightBorder.Text);
                 step = double.Parse(textBoxForStep.Text);
@@ -82,7 +90,12 @@ namespace laboratory_3 {
                 return stop;
             }
 
-            Check check = new Check();
+            if (!check.CheckCoefficient(coefficient)) {
+                MessageBox.Show("The coefficient should be in the range from -100 to 100", "Warning!");
+                stop = false;
+                return stop;
+            }
+
             if (!check.CheckInterval(leftBorder, rightBorder)) {
                 MessageBox.Show("Incorrect interval", "Warning!");
                 stop = false;
@@ -90,7 +103,7 @@ namespace laboratory_3 {
             }
 
             if (!check.CheckStep(step)) {
-                MessageBox.Show("The step must be greater than zero", "Warning!");
+                MessageBox.Show("The step should be in the range from 0 to 10", "Warning!");
                 stop = false;
                 return stop;
             }
@@ -113,7 +126,6 @@ namespace laboratory_3 {
             ShowTable();
             inputToolStripMenuItem.Enabled = true;
         }
-
 
         private void IntputToolStripMenuItemClick(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog() {
@@ -206,7 +218,6 @@ namespace laboratory_3 {
             outputToolStripMenuItem.Enabled = true;
             saveDataToExcelToolStripMenuItem.Enabled = true;
         }
-
 
         private void OutputToolStripMenuItemClick(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog() {

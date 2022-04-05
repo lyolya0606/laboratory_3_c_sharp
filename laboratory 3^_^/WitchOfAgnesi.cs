@@ -18,7 +18,7 @@ namespace laboratory_3 {
         }
 
         public double CountingFunction(double x) {
-            if (Math.Abs(coefficient) < 0.0001 && Math.Abs(x) < 0.0001) {
+            if (Math.Abs(coefficient) < 0.00001 && Math.Abs(x) < 0.00001) {
                 return Double.NaN;
             }
             return Math.Round(Math.Pow(coefficient, 3) / (Math.Pow(coefficient, 2) + Math.Pow(x, 2)), 4);

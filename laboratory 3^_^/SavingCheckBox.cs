@@ -1,6 +1,5 @@
 ﻿using System.IO;
 
-
 namespace laboratory_3 {
     public class SavingCheckBox {
         public bool ReadCheckBox() {
@@ -37,26 +36,4 @@ namespace laboratory_3 {
         }
     }
 }
-
-
-//public static void ChangeStartMessageFile(bool IsAgain, string filename) {
-//    if (IsAgain) {
-//        using StreamWriter file = new(filename, false); 
-//        file.Write(1);
-//    } else {
-//        using StreamWriter file = new(filename, false); 
-//        file.Write(0);
-//    }
-//}
-
-
-//public static bool ReadStartMessageFile(string filename) {
-//    using (StreamReader file = new(filename)) {
-//        if (int.Parse(file.ReadLine()) == 1) {
-//            return true;
-//        }
-//    }
-
-//    return false;
-//}
 

@@ -14,7 +14,14 @@ namespace laboratory_3 {
         }
 
         public bool CheckStep(double a) {
-            if (a <= 0) {
+            if (a <= 0 || a >= 100) {
+                return false;
+            }
+            return true;
+        }
+
+        public bool CheckCoefficient(double a) {
+            if (a <= -100 || a >= 100) {
                 return false;
             }
             return true;
